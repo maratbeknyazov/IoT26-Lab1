@@ -1,0 +1,31 @@
+[wokwi]
+version = 1
+elf = ".pio/build/wokwi/firmware.elf"
+firmware = ".pio/build/wokwi/firmware.bin"
+rfc2217ServerPort = 4000
+
+[[wokwi.parts]]
+type = "wokwi-esp32-devkit-v1"
+id = "esp"
+attrs = { psramSize = "0", flashSize = "4194304" }
+
+[wokwi.esp32]
+partitionScheme = "default"
+
+# "default" includes:
+# - app0 (OTA_0) partition
+# - app1 (OTA_1) partition
+# - nvs, otadata for OTA
+
+# Options for partitionScheme:
+# - "default" : factory app (1.6MB) + nvs + vfs
+# - "minimal" : factory app only
+# - "min_spiffs" : factory app (1.9MB) + SPIFFS (190KB)
+# - "huge_app" : factory app (3MB)
+# - "no_ota" : factory app (2MB) + SPIFFS (2MB)
+# - "default_8MB" : For 8MB flash boards
+
+# Forward http://localhost:8180 to port 80 on the simulated ESP32:
+# [[net.forward]]
+# from = "localhost:8180"
+# to = "target:80"
